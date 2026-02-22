@@ -1,20 +1,32 @@
 ﻿#include "pch.h"
 
 #include "NeuronArrayBase.h"
-#include <windows.h>
-#include <ppl.h>
+#include "platform.h"
 #include <iostream>
 #include <random>
 #include <atomic>
 
+#if NEURO_USE_TBB
+#  include <tbb/parallel_for.h>
+#  include <tbb/concurrent_queue.h>
+   using namespace tbb;
+#else
+#  include <ppl.h>
+#  include <concurrent_queue.h>
+   using namespace concurrency;
+#endif
 
-using namespace concurrency;
 using namespace std;
 
 namespace NeuronEngine
 {
+#if NEURO_USE_TBB
+	tbb::concurrent_queue<SynapseBase> NeuronArrayBase::remoteQueue;
+	tbb::concurrent_queue<NeuronBase*> NeuronArrayBase::fire2Queue;
+#else
 	Concurrency::concurrent_queue<SynapseBase> NeuronArrayBase::remoteQueue;
 	Concurrency::concurrent_queue<NeuronBase*> NeuronArrayBase::fire2Queue;
+#endif
 	std::vector<unsigned long long> NeuronArrayBase::fireList1;
 	//std::vector<std::atomic<unsigned long long>> NeuronArrayBase::fireList1;
 	std::vector<unsigned long long> NeuronArrayBase::fireList2;

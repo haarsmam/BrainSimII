@@ -276,3 +276,6 @@ AutomatedTests/*.png
 /Installer/BrainSimII_Setup.exe
 /Installer/BrainSimII_Setup.zip
 /BrainSimulator/Properties/launchSettings.json
+
+# cmake
+build*/

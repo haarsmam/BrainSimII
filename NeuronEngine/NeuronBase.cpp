@@ -90,7 +90,12 @@ namespace NeuronEngine
 		if (len > 0)
 		{
 			label = new wchar_t[len + 2];
+#ifdef _WIN32
 			wcscpy_s(label, len + 2, newLabel);
+#else
+			wcsncpy(label, newLabel, len + 1);
+			label[len + 1] = L'\0';
+#endif
 		}
 	}
 	bool NeuronBase::GetInUse()

@@ -1,10 +1,12 @@
 ﻿#pragma once
 
+#include "platform.h"
+
 namespace NeuronEngine { class NeuronBase; }
 
 namespace NeuronEngine
 {
-	class  __declspec(dllexport) SynapseBase
+	class NEURO_EXPORT SynapseBase
 	{
 	public:
 		enum class modelType { Fixed, Binary, Hebbian1, Hebbian2,Hebbian3,Gate,Learn};

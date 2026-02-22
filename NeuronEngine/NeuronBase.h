@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include "platform.h"
 #include <string>
 #include <vector>
 #include <atomic>
@@ -48,40 +49,40 @@ namespace NeuronEngine
 
 
 	public:
-		__declspec(dllexport)  NeuronBase(int ID);
-		__declspec(dllexport)  ~NeuronBase();
+		NEURO_EXPORT  NeuronBase(int ID);
+		NEURO_EXPORT  ~NeuronBase();
 
-		__declspec(dllexport)  int GetId();
-		__declspec(dllexport)  modelType GetModel();
-		__declspec(dllexport)  void SetModel(modelType value);
-		__declspec(dllexport)  float GetLastCharge();
-		__declspec(dllexport)  void SetLastCharge(float value);
-		__declspec(dllexport)  float GetCurrentCharge();
-		__declspec(dllexport)  void SetCurrentCharge(float value);
+		NEURO_EXPORT  int GetId();
+		NEURO_EXPORT  modelType GetModel();
+		NEURO_EXPORT  void SetModel(modelType value);
+		NEURO_EXPORT  float GetLastCharge();
+		NEURO_EXPORT  void SetLastCharge(float value);
+		NEURO_EXPORT  float GetCurrentCharge();
+		NEURO_EXPORT  void SetCurrentCharge(float value);
 
-		__declspec(dllexport)  void AddSynapse(NeuronBase* n, float weight, SynapseBase::modelType model = SynapseBase::modelType::Fixed, bool noBackPtr = true);
-		__declspec(dllexport)  void AddSynapseFrom(NeuronBase* n, float weight, SynapseBase::modelType model = SynapseBase::modelType::Fixed);
-		__declspec(dllexport)  void DeleteSynapse(NeuronBase* n);
-		__declspec(dllexport)  void GetLock();
-		__declspec(dllexport)  void ClearLock();
-		__declspec(dllexport)  std::vector<SynapseBase> GetSynapses();
-		__declspec(dllexport)  std::vector<SynapseBase> GetSynapsesFrom();
-		__declspec(dllexport)  int GetSynapseCount();
+		NEURO_EXPORT  void AddSynapse(NeuronBase* n, float weight, SynapseBase::modelType model = SynapseBase::modelType::Fixed, bool noBackPtr = true);
+		NEURO_EXPORT  void AddSynapseFrom(NeuronBase* n, float weight, SynapseBase::modelType model = SynapseBase::modelType::Fixed);
+		NEURO_EXPORT  void DeleteSynapse(NeuronBase* n);
+		NEURO_EXPORT  void GetLock();
+		NEURO_EXPORT  void ClearLock();
+		NEURO_EXPORT  std::vector<SynapseBase> GetSynapses();
+		NEURO_EXPORT  std::vector<SynapseBase> GetSynapsesFrom();
+		NEURO_EXPORT  int GetSynapseCount();
 
-		__declspec(dllexport)  bool GetInUse();
-		__declspec(dllexport)  wchar_t* GetLabel();
-		__declspec(dllexport)  void SetLabel(const wchar_t*);
+		NEURO_EXPORT  bool GetInUse();
+		NEURO_EXPORT  wchar_t* GetLabel();
+		NEURO_EXPORT  void SetLabel(const wchar_t*);
 
 
-		__declspec(dllexport)  float GetLeakRate();
-		__declspec(dllexport)  void SetLeakRate(float value);
-		__declspec(dllexport)  int GetAxonDelay();
-		__declspec(dllexport)  void SetAxonDelay(int value);
-		__declspec(dllexport)  long long GetLastFired();
+		NEURO_EXPORT  float GetLeakRate();
+		NEURO_EXPORT  void SetLeakRate(float value);
+		NEURO_EXPORT  int GetAxonDelay();
+		NEURO_EXPORT  void SetAxonDelay(int value);
+		NEURO_EXPORT  long long GetLastFired();
 
-		__declspec(dllexport)  void AddToCurrentValue(float weight);
+		NEURO_EXPORT  void AddToCurrentValue(float weight);
 
-		__declspec(dllexport)  bool Fire1(long long generation);
+		NEURO_EXPORT  bool Fire1(long long generation);
 		void Fire2(long long cycle);
 		bool IsGated(long long cycle);
 		void HandleHebbian2Synapses(long long cycle);
