@@ -23,9 +23,10 @@ namespace NeuronServer
     class Program
     {
 
-        //for timing info
-        [DllImport("Kernel32.dll", CallingConvention = CallingConvention.Winapi)]
-        public static extern void GetSystemTimePreciseAsFileTime(out long filetime);
+        // High-resolution timestamp in 100-nanosecond units (same unit as the
+        // old Kernel32 GetSystemTimePreciseAsFileTime), works on all platforms.
+        static long GetSystemTimePreciseAsFileTime()
+            => Stopwatch.GetTimestamp() * 10_000_000L / Stopwatch.Frequency;
 
         static List<long> elapsedFiring;
         static List<long> elapsedTransfer;
@@ -162,9 +163,9 @@ namespace NeuronServer
                 case "Fire":
                     Task.Run(() =>
                     {
-                        GetSystemTimePreciseAsFileTime(out long start);
+                        long start = GetSystemTimePreciseAsFileTime();
                         theNeuronArray.Fire();
-                        GetSystemTimePreciseAsFileTime(out long end);
+                        long end = GetSystemTimePreciseAsFileTime();
                         elapsedFiring.RemoveAt(0);
                         elapsedFiring.Add(end - start);
                         neuronsFired.RemoveAt(0);
@@ -176,7 +177,7 @@ namespace NeuronServer
                 case "Transfer":
                     Task.Run(() =>
                     {
-                        GetSystemTimePreciseAsFileTime(out long start);
+                        long start = GetSystemTimePreciseAsFileTime();
                         byte[] xx = theNeuronArray.GetRemoteFiringSynapses();
                         List<Synapse> synapses = ConvertToSynapseList(xx);
                         List<Synapse>[] synapsesForServer = new List<Synapse>[serverList.Count];
@@ -210,7 +211,7 @@ namespace NeuronServer
                             }
                         }
                         SendToClient("Done " + Environment.MachineName + " " + theNeuronArray.GetGeneration() + " " + theNeuronArray.GetFiredCount());
-                        GetSystemTimePreciseAsFileTime(out long end);
+                        long end = GetSystemTimePreciseAsFileTime();
                         elapsedTransfer.RemoveAt(0);
                         elapsedTransfer.Add(end - start);
                         boundarySynapses.RemoveAt(0);

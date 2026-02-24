@@ -4,7 +4,7 @@
 
 namespace NeuronEngine
 {
-	NeuronBase* SynapseBase::GetTarget()
+	NeuronBase* SynapseBase::GetTarget() const
 	{
 		return targetNeuron;
 	}
@@ -12,7 +12,7 @@ namespace NeuronEngine
 	{
 		targetNeuron = target;
 	}
-	float SynapseBase::GetWeight()
+	float SynapseBase::GetWeight() const
 	{
 		return weight;
 	}
@@ -21,7 +21,7 @@ namespace NeuronEngine
 		weight = value;
 	}
 
-	SynapseBase::modelType SynapseBase::GetModel()
+	SynapseBase::modelType SynapseBase::GetModel() const
 	{
 		return model;
 	}

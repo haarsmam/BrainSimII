@@ -9,6 +9,7 @@ set(SOURCES
     NeuronArrayBase.cpp
     NeuronBase.cpp
     SynapseBase.cpp
+    NeuronEngine_capi.cpp
     pch.cpp
 )
 

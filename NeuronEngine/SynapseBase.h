@@ -12,11 +12,11 @@ namespace NeuronEngine
 		enum class modelType { Fixed, Binary, Hebbian1, Hebbian2,Hebbian3,Gate,Learn};
 
 		void SetTarget(NeuronBase * target);
-		NeuronBase* GetTarget();
-		float GetWeight();
+		NeuronBase* GetTarget() const;
+		float GetWeight() const;
 		void SetWeight(float value);
 		void SetModel(modelType value);
-		modelType GetModel();
+		modelType GetModel() const;
 
 	private:
 		NeuronBase* targetNeuron = 0; //pointer to the target neuron
